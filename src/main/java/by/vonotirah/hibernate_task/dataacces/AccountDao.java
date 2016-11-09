@@ -9,4 +9,6 @@ public interface AccountDao extends AbstractDao<Account> {
 	void deleteById(Long id);
 
 	void update(Account account);
+
+	Account getById(Long id);
 }

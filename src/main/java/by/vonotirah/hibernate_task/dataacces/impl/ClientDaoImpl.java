@@ -21,4 +21,17 @@ public class ClientDaoImpl extends AbstractDaoImpl<Client> implements ClientDao 
 		getSession().delete(client);
 		closeSessionWithTransaction();
 	}
+
+	public void update(Client client) {
+		openSessionWithTransaction();
+		getSession().update(client);
+		closeSessionWithTransaction();
+	}
+
+	public Client getById(Long id) {
+		openSession();
+		Client client = getSession().get(Client.class, id);
+		closeSession();
+		return client;
+	}
 }

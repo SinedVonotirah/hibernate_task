@@ -27,4 +27,11 @@ public class AccountDaoImpl extends AbstractDaoImpl<Account> implements AccountD
 		getSession().update(account);
 		closeSessionWithTransaction();
 	}
+
+	public Account getById(Long id) {
+		openSession();
+		Account account = getSession().get(Account.class, id);
+		closeSession();
+		return account;
+	}
 }

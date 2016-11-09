@@ -15,12 +15,9 @@ public abstract class AbstractDaoImpl<Entity> implements AbstractDao<Entity> {
 	private Session session;
 	private Transaction transaction;
 
-	private final Class<Entity> entityClass;
-
 	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractDaoImpl.class);
 
 	public AbstractDaoImpl(final Class<Entity> entityClass) {
-		this.entityClass = entityClass;
 		setSessionFactory();
 	}
 
@@ -30,10 +27,6 @@ public abstract class AbstractDaoImpl<Entity> implements AbstractDao<Entity> {
 
 	private SessionFactory getSessionFactory() {
 		return sessionFactory;
-	}
-
-	private Class<Entity> getEntityClass() {
-		return entityClass;
 	}
 
 	public Session openSession() {
