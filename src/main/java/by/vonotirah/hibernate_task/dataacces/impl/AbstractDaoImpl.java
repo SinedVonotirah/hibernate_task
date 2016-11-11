@@ -18,15 +18,27 @@ public abstract class AbstractDaoImpl<Entity> implements AbstractDao<Entity> {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractDaoImpl.class);
 
 	public AbstractDaoImpl(final Class<Entity> entityClass) {
-		setSessionFactory();
+		createSessionFactory();
 	}
 
-	private static void setSessionFactory() {
+	public static void createSessionFactory() {
 		sessionFactory = new Configuration().configure().buildSessionFactory();
 	}
 
-	private SessionFactory getSessionFactory() {
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
+	public SessionFactory getSessionFactory() {
 		return sessionFactory;
+	}
+
+	public void setSession(Session session) {
+		this.session = session;
+	}
+
+	public Session getSession() {
+		return this.session;
 	}
 
 	public Session openSession() {
@@ -47,9 +59,5 @@ public abstract class AbstractDaoImpl<Entity> implements AbstractDao<Entity> {
 	public void closeSessionWithTransaction() {
 		transaction.commit();
 		session.close();
-	}
-
-	public Session getSession() {
-		return this.session;
 	}
 }
