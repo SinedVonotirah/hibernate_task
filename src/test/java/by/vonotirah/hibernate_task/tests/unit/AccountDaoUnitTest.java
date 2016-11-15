@@ -1,4 +1,4 @@
-package by.vonotirah.hibernate_task.tests;
+package by.vonotirah.hibernate_task.tests.unit;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -7,22 +7,23 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 
-import by.vonotirah.hibernate_task.dataacces.ClientDao;
-import by.vonotirah.hibernate_task.dataacces.impl.ClientDaoImpl;
-import by.vonotirah.hibernate_task.datamodel.Client;
+import by.vonotirah.hibernate_task.dataacces.AccountDao;
+import by.vonotirah.hibernate_task.dataacces.impl.AccountDaoImpl;
+import by.vonotirah.hibernate_task.datamodel.Account;
+import by.vonotirah.hibernate_task.tests.AbstractTest;
 
-public class ClientDaoModuleTest extends AbstractTest {
+public class AccountDaoUnitTest extends AbstractTest {
 
-	private Client mockedClient;
-	private ClientDao clientDao;
+	private Account mockedAccount;
+	private AccountDao accountDao;
 	private Session mockedSession;
 	private SessionFactory mockedSessionFactory;
 	private Transaction mockedTransaction;
 
 	@Before
 	public void dependencies() {
-		clientDao = new ClientDaoImpl();
-		mockedClient = mock(Client.class);
+		accountDao = new AccountDaoImpl();
+		mockedAccount = mock(Account.class);
 		mockedSessionFactory = mock(SessionFactory.class);
 		mockedSession = mock(Session.class);
 		mockedTransaction = mock(Transaction.class);
@@ -30,16 +31,16 @@ public class ClientDaoModuleTest extends AbstractTest {
 		when(mockedSessionFactory.openSession()).thenReturn(mockedSession);
 		when(mockedSession.beginTransaction()).thenReturn(mockedTransaction);
 
-		clientDao.setSessionFactory(mockedSessionFactory);
+		accountDao.setSessionFactory(mockedSessionFactory);
 	}
 
 	@Test
 	public void persistCallTest() {
-		clientDao.persist(mockedClient);
+		accountDao.persist(mockedAccount);
 
 		verify(mockedSessionFactory).openSession();
 		verify(mockedSession).beginTransaction();
-		verify(mockedSession).persist(mockedClient);
+		verify(mockedSession).persist(mockedAccount);
 		verify(mockedTransaction).commit();
 		verify(mockedSession).close();
 	}
@@ -47,24 +48,24 @@ public class ClientDaoModuleTest extends AbstractTest {
 	@Test
 	public void deleteByIdCallTest() {
 		Long randomLong = getRandomLong();
-		when(mockedSession.get(Client.class, randomLong)).thenReturn(mockedClient);
-		clientDao.deleteById(randomLong);
+		when(mockedSession.get(Account.class, randomLong)).thenReturn(mockedAccount);
+		accountDao.deleteById(randomLong);
 
 		verify(mockedSessionFactory).openSession();
 		verify(mockedSession).beginTransaction();
-		verify(mockedSession).get(Client.class, randomLong);
-		verify(mockedSession).delete(mockedClient);
+		verify(mockedSession).get(Account.class, randomLong);
+		verify(mockedSession).delete(mockedAccount);
 		verify(mockedTransaction).commit();
 		verify(mockedSession).close();
 	}
 
 	@Test
 	public void updateCallTest() {
-		clientDao.update(mockedClient);
+		accountDao.update(mockedAccount);
 
 		verify(mockedSessionFactory).openSession();
 		verify(mockedSession).beginTransaction();
-		verify(mockedSession).update(mockedClient);
+		verify(mockedSession).update(mockedAccount);
 		verify(mockedTransaction).commit();
 		verify(mockedSession).close();
 	}
@@ -72,10 +73,10 @@ public class ClientDaoModuleTest extends AbstractTest {
 	@Test
 	public void getByIdCallTest() {
 		Long randomLong = getRandomLong();
-		clientDao.getById(randomLong);
+		accountDao.getById(randomLong);
 
 		verify(mockedSessionFactory).openSession();
-		verify(mockedSession).get(Client.class, randomLong);
+		verify(mockedSession).get(Account.class, randomLong);
 		verify(mockedSession).close();
 	}
 }

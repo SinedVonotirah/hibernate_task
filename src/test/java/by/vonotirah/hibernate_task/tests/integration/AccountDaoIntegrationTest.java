@@ -1,4 +1,4 @@
-package by.vonotirah.hibernate_task.tests;
+package by.vonotirah.hibernate_task.tests.integration;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -12,6 +12,7 @@ import by.vonotirah.hibernate_task.dataacces.impl.AccountDaoImpl;
 import by.vonotirah.hibernate_task.dataacces.impl.ClientDaoImpl;
 import by.vonotirah.hibernate_task.datamodel.Account;
 import by.vonotirah.hibernate_task.datamodel.Client;
+import by.vonotirah.hibernate_task.tests.AbstractTest;
 
 public class AccountDaoIntegrationTest extends AbstractTest {
 

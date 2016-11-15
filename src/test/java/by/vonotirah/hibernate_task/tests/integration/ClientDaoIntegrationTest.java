@@ -1,4 +1,4 @@
-package by.vonotirah.hibernate_task.tests;
+package by.vonotirah.hibernate_task.tests.integration;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import by.vonotirah.hibernate_task.dataacces.ClientDao;
 import by.vonotirah.hibernate_task.dataacces.impl.ClientDaoImpl;
 import by.vonotirah.hibernate_task.datamodel.Client;
+import by.vonotirah.hibernate_task.tests.AbstractTest;
 
 public class ClientDaoIntegrationTest extends AbstractTest {
 
